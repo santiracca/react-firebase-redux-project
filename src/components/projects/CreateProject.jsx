@@ -1,11 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import * as projectActions from "../../store/actions/projectActions";
 
-const CreateProject = () => {
+const CreateProject = ({ history }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const dispatch = useDispatch();
+
   const handleSubmit = e => {
     e.preventDefault();
+    dispatch(
+      projectActions.createProject({
+        title,
+        content
+      })
+    );
+    history.push("/");
   };
 
   return (
